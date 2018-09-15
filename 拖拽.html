@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.box{width: 300px;
+				height: 100px;
+				margin: 10px;
+				text-align: center;
+				line-height: 100px;
+				font-size: 50px;
+				color: #FFFFFF;
+				background-color: gray;
+			}
+			
+			.big{
+				height: 400px;
+				margin: 20px;
+				position: fixed;
+				width: 90%;
+				bottom: 20px;
+				border: solid 1px black;
+				position: relative;
+			}
+			.huishou{position: absolute;
+	
+				left: 100px;
+				top:120px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box" draggable="true">《文章1》</div><br />
+		<div class="box" draggable="true">《文章2》</div><br />
+		<div class="box" draggable="true">《文章3》</div><br />
+		<div class="box" draggable="true">《文章4》</div><br />
+		<br /><br /><br />
+		<div class="big">
+			<div class="huishou">
+				<img src="img/垃圾桶.jpg.png" />
+				
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+			var box = document.querySelectorAll(".box");
+			var bigBox = document.querySelector(".big");
+			var tmp = null;
+			
+			for(var i=0;i<box.length;i++){
+				box[i].ondragstart = function(){
+					tmp = this;
+					console.log("开始");
+				}
+				box[i].ondragend = function(){
+					tmp = null;
+					console.log("结束");
+				}
+			}
+			
+			
+			
+			
+			bigBox.ondragenter = function(){
+				console.log("进入");
+				
+			}
+			bigBox.ondragover = function(e){
+//				console.log("悬停");
+				e.preventDefault();//组织默认事件
+			}
+			bigBox.ondragleave = function(e){
+				console.log("离开");
+				
+			}
+			bigBox.ondrop = function(){
+				console.log("释放");
+				
+				if(tmp!=null){
+					this.appendChild(tmp);
+				}
+			}
+			
+			
+		</script>
+		
+		
+	</body>
+	
+</html>
